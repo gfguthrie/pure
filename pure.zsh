@@ -217,8 +217,11 @@ prompt_pure_precmd() {
 	# index of psvar (12) here to avoid collisions with user defined entries.
 	psvar[12]=
 	# Check if a Conda environment is active and display its name.
+	# Else check if an AWS Vault environment is active and display its name.
 	if [[ -n $CONDA_DEFAULT_ENV ]]; then
 		psvar[12]="${CONDA_DEFAULT_ENV//[$'\t\r\n']}"
+	elif [[ -n $AWS_VAULT ]]; then
+		psvar[12]="${AWS_VAULT//[$'\t\r\n']}"
 	fi
 	# When VIRTUAL_ENV_DISABLE_PROMPT is empty, it was unset by the user and
 	# Pure should take back control.
